@@ -13,7 +13,7 @@ def sieve(n):
     for num in range(2,n):                                  # get potential multiples of numbers in the range of your list
         for p in sieve_list:                                # get your p values
             if num * p in sieve_list:                       # check if multiple * p is in the list
-                sieve_list.remove(num * p)                  # remove the resultant multiple
+                sieve_list.remove(num * p)                  # remove the resultant multiple 
     
 
     print(*sieve_list, sep=", ", end="" + "\n")        
