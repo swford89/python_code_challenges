@@ -1,5 +1,6 @@
 # Coding Nomads - Code Challenge #1: The Sieve of Eratosthenes
 # Scott Ford
+# April 30th, 2021
 
 def sieve(n):
     sieve_list = [] 
