@@ -3,6 +3,8 @@
 # April 30th, 2021
 
 def sieve(n):
+    """to find all the prime numbers up to a specified maximum"""
+    
     sieve_list = [] 
 
     if n in range(2,65536):                                 # make sure min and max values are >= 2 and < 65,536
