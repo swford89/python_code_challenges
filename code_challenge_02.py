@@ -18,6 +18,3 @@ def find_floor(directions: str):
         elif direction == ')':
             current_floor -= 1
     return current_floor
-
-current_floor = find_floor(')))')
-print(current_floor)
