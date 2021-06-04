@@ -17,4 +17,6 @@ def find_floor(directions: str):
             current_floor += 1
         elif direction == ')':
             current_floor -= 1
+        else:
+            pass
     return current_floor
