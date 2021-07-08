@@ -4,6 +4,7 @@
 
 # Task #1 = split deck into two equal sized halves: 26 cards each, 52 total
 # Task #2 = Interleave each half evenly with one another; one card from the left, one card from the right
+# Task #3 = How many shuffles does it take to get back to the default deck state?
 
 
 SUITS = ['♠️', '♥️', '♦️', '♣️']
@@ -40,21 +41,23 @@ class Card():
     def __repr__(self):
         return RANKS[self.rank] + SUITS[self.suit]
 
-    # def shuffle(self, default_deck: list):
-    #     one_half = default_deck[:26]
-    #     another_half = default_deck[26:]
-    #     shuffled_deck = one_half[::2] + another_half[::2]
-    #     return shuffled_deck
+    def shuffle(self, default_deck: list):
+        return shuffled_deck
+
 
 def shuffle(deck: list):
-    one_half = deck[:26]
-    another_half = deck[26:]
+    """ function for interleaving two half decks of cards"""
     shuffled_deck = []
+    count = 0
+    while count < 26:
+        one_half = deck[:26]
+        another_half = deck[26:]
+        shuffled_deck.append(one_half[count])
+        shuffled_deck.append(another_half[count])
+        count += 1 
     return shuffled_deck
 
 default_deck = [(suit, rank) for suit in SUITS for rank in RANKS]
-one_half = default_deck[:26]
-another_half = default_deck[26:]
 
 shuffled_deck = shuffle(default_deck)
 print(*default_deck)
