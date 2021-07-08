@@ -10,29 +10,6 @@
 SUITS = ['♠️', '♥️', '♦️', '♣️']
 RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
 
-SUITS_DICT = {
-    '♠️': 1,
-    '♥️': 2,
-    '♦️': 3, 
-    '♣️': 4,
-}
-
-RANKS_DICT = {
-    'A': 1,
-    '2': 2,
-    '3': 3,
-    '4': 4,
-    '5': 5,
-    '6': 6,
-    '7': 7,
-    '8': 8,
-    '9': 9,
-    '10': 10,
-    'J': 11,
-    'Q': 12,
-    'K': 13,
-}
-
 class Card():
     def __init__(self, suit: int, rank: int) -> None:
         self.suit = suit
@@ -41,12 +18,12 @@ class Card():
     def __repr__(self):
         return RANKS[self.rank] + SUITS[self.suit]
 
-    def shuffle(self, default_deck: list):
+    def shuffle(self):
+        """class method for interleaving two halves of a deck of cards"""
         return shuffled_deck
 
-
 def shuffle(deck: list):
-    """ function for interleaving two half decks of cards"""
+    """function for interleaving two halves of a deck of cards"""
     shuffled_deck = []
     count = 0
     while count < 26:
@@ -57,8 +34,30 @@ def shuffle(deck: list):
         count += 1 
     return shuffled_deck
 
-default_deck = [(suit, rank) for suit in SUITS for rank in RANKS]
+def indefinte_shuffle(deck: list):
+    shuffled_deck = []
+    shuffle_count = 0
+    while shuffled_deck != deck:
+        one_half = deck[:26]
+        another_half = deck[26:]
+        shuffled_deck.append(one_half[shuffle_count])
+        shuffled_deck.append(another_half[shuffle_count])
+        shuffle_count += 1 
+    return shuffle_count
 
-shuffled_deck = shuffle(default_deck)
-print(*default_deck)
-print(*shuffled_deck)
+# NORMAL NESTED LOOP 
+# new_deck = []
+# for suit_num in range(len(SUITS)):
+#     for rank_num in range(len(RANKS)):
+#         some_card = Card(suit_num, rank_num)
+#         new_deck.append(some_card)
+
+# LIST COMPREHENSION
+new_deck = [Card(suit_num, rank_num) for suit_num in range(len(SUITS)) for rank_num in range(len(RANKS))]
+
+# Shuffle/interleave equal halves of new deck
+shuffled_deck = shuffle(new_deck)
+
+# Shuffle until deck gets back to initial new deck state
+shuffle_count = indefinte_shuffle(new_deck)
+print(shuffle_count)
