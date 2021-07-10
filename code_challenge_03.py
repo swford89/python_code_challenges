@@ -17,10 +17,6 @@ class Card():
     def __repr__(self):
         return RANKS[self.rank] + SUITS[self.suit]
 
-    def shuffle(self):
-        """class method for interleaving two halves of a deck of cards"""
-        return shuffled_deck
-
 def shuffle(deck: list):
     """function for interleaving two halves of a deck of cards"""
     shuffled_deck = []
