@@ -6,7 +6,6 @@
 # Task #2 = Interleave each half evenly with one another; one card from the left, one card from the right
 # Task #3 = How many shuffles does it take to get back to the default deck state?
 
-
 SUITS = ['♠️', '♥️', '♦️', '♣️']
 RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
 
@@ -25,39 +24,53 @@ class Card():
 def shuffle(deck: list):
     """function for interleaving two halves of a deck of cards"""
     shuffled_deck = []
-    count = 0
-    while count < 26:
+    interleave_count = 0
+    while interleave_count < 26:
         one_half = deck[:26]
         another_half = deck[26:]
-        shuffled_deck.append(one_half[count])
-        shuffled_deck.append(another_half[count])
-        count += 1 
+        shuffled_deck.append(one_half[interleave_count])
+        shuffled_deck.append(another_half[interleave_count])
+        interleave_count += 1 
     return shuffled_deck
 
-def indefinte_shuffle(deck: list):
-    shuffled_deck = []
+def indefinte_shuffle(new_deck: list, shuffled_deck: list):
+    """function to determine how many shuffles it will take to reach original new deck state"""
+    shuffling = True
     shuffle_count = 0
-    while shuffled_deck != deck:
-        one_half = deck[:26]
-        another_half = deck[26:]
-        shuffled_deck.append(one_half[shuffle_count])
-        shuffled_deck.append(another_half[shuffle_count])
-        shuffle_count += 1 
-    return shuffle_count
+    while shuffling:
+        interleave_count = 0
+        transient_deck = []
+        one_half = shuffled_deck[:26]
+        another_half = shuffled_deck[26:]
+        while interleave_count < 26:
+            one_half = shuffled_deck[:26]
+            another_half = shuffled_deck[26:]
+            transient_deck.append(one_half[interleave_count])
+            transient_deck.append(another_half[interleave_count])
+            interleave_count += 1
+        shuffle_count += 1
+        shuffled_deck = transient_deck.copy()
+        transient_deck.clear()
+        if shuffled_deck == new_deck:
+            count_string = f"Total shuffles needed to return shuffled deck back to new deck state: {shuffle_count}"
+            shuffling = False
+    return count_string
 
-# NORMAL NESTED LOOP 
+# NORMAL NESTED LOOP/CARTESEAN PRODUCT 
 # new_deck = []
 # for suit_num in range(len(SUITS)):
 #     for rank_num in range(len(RANKS)):
 #         some_card = Card(suit_num, rank_num)
 #         new_deck.append(some_card)
 
-# LIST COMPREHENSION
+# LIST COMPREHENSION: for creating a deck of cards
 new_deck = [Card(suit_num, rank_num) for suit_num in range(len(SUITS)) for rank_num in range(len(RANKS))]
+# print(new_deck)
 
 # Shuffle/interleave equal halves of new deck
 shuffled_deck = shuffle(new_deck)
+# print(shuffled_deck)
 
 # Shuffle until deck gets back to initial new deck state
-shuffle_count = indefinte_shuffle(new_deck)
-print(shuffle_count)
+count_string = indefinte_shuffle(new_deck, shuffled_deck)
+# print(count_string)
