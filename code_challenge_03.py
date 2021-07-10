@@ -1,5 +1,5 @@
 # CodingNomads - Coding Challenge #3: The Perfect Shuffle 
-# July 3, 2021
+# July 10, 2021
 # Scott Ford
 
 # Task #1 = split deck into two equal sized halves: 26 cards each, 52 total
@@ -61,12 +61,12 @@ def indefinte_shuffle(new_deck: list, shuffled_deck: list):
 
 # LIST COMPREHENSION: for creating a deck of cards
 new_deck = [Card(suit_num, rank_num) for suit_num in range(len(SUITS)) for rank_num in range(len(RANKS))]
-# print(new_deck)
+print(f"Brand new deck of cards:\n{new_deck}")
 
 # Shuffle/interleave equal halves of new deck
 shuffled_deck = shuffle(new_deck)
-# print(shuffled_deck)
+print(f"Interleaving two halves of the new deck:\n{shuffled_deck}")
 
 # Shuffle until deck gets back to initial new deck state
 count_string = indefinte_shuffle(new_deck, shuffled_deck)
-# print(count_string)
+print(count_string)
