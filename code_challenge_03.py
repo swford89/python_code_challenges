@@ -21,28 +21,26 @@ def shuffle(deck: list):
     """function for interleaving two halves of a deck of cards"""
     shuffled_deck = []
     interleave_count = 0
+    ONE_HALF = deck[:26]
+    ANOTHER_HALF = deck[26:]
     while interleave_count < 26:
-        one_half = deck[:26]
-        another_half = deck[26:]
-        shuffled_deck.append(one_half[interleave_count])
-        shuffled_deck.append(another_half[interleave_count])
+        shuffled_deck.append(ONE_HALF[interleave_count])
+        shuffled_deck.append(ANOTHER_HALF[interleave_count])
         interleave_count += 1 
     return shuffled_deck
 
 def indefinte_shuffle(new_deck: list, shuffled_deck: list):
     """function to determine how many shuffles it will take to reach original new deck state"""
     shuffling = True
-    shuffle_count = 0
+    shuffle_count = 1
     while shuffling:
+        ONE_HALF = shuffled_deck[:26]
+        ANOTHER_HALF = shuffled_deck[26:]
         interleave_count = 0
         transient_deck = []
-        one_half = shuffled_deck[:26]
-        another_half = shuffled_deck[26:]
         while interleave_count < 26:
-            one_half = shuffled_deck[:26]
-            another_half = shuffled_deck[26:]
-            transient_deck.append(one_half[interleave_count])
-            transient_deck.append(another_half[interleave_count])
+            transient_deck.append(ONE_HALF[interleave_count])
+            transient_deck.append(ANOTHER_HALF[interleave_count])
             interleave_count += 1
         shuffle_count += 1
         shuffled_deck = transient_deck.copy()
